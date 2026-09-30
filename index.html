@@ -1,0 +1,344 @@
+{% extends "base.html" %}
+
+
+{% block content %}
+
+<section class="hero">
+
+    <div>
+
+        <p class="eyebrow">
+            AI COMIC CREATOR
+        </p>
+
+        <h1>
+            Turn your idea into a comic.
+        </h1>
+
+        <p class="hero-text">
+
+            Create a five-panel comic story with
+            AI-generated narration, dialogue and
+            illustrations.
+
+        </p>
+
+    </div>
+
+</section>
+
+
+{% if error %}
+
+<div class="alert error">
+
+    <strong>Something went wrong.</strong>
+
+    <p>
+        {{ error }}
+    </p>
+
+</div>
+
+{% endif %}
+
+
+<section class="card">
+
+    <h2>
+        Create Your Comic
+    </h2>
+
+    <p class="muted">
+        Fill in the details below and ComicCraft
+        will generate five comic panels.
+    </p>
+
+
+    <form
+        action="/generate"
+        method="post"
+        class="comic-form"
+    >
+
+        <!-- Story Prompt -->
+
+        <div class="form-group">
+
+            <label for="story_prompt">
+                Story Prompt
+            </label>
+
+            <textarea
+                id="story_prompt"
+                name="story_prompt"
+                rows="5"
+                maxlength="2000"
+                required
+                placeholder="Example: A young student discovers a mysterious glowing book..."
+            >{{ form.story_prompt if form else "" }}</textarea>
+
+        </div>
+
+
+        <!-- Character -->
+
+        <div class="form-group">
+
+            <label for="character_name">
+                Main Character
+            </label>
+
+            <input
+                type="text"
+                id="character_name"
+                name="character_name"
+                maxlength="80"
+                required
+                placeholder="Example: Arjun"
+                value="{{ form.character_name if form else '' }}"
+            >
+
+        </div>
+
+
+        <!-- Setting -->
+
+        <div class="form-group">
+
+            <label for="setting">
+                Setting
+            </label>
+
+            <select
+                id="setting"
+                name="setting"
+                required
+            >
+
+                <option value="">
+                    Select a setting
+                </option>
+
+                <option
+                    value="School"
+                    {% if form and form.setting == "School" %}
+                    selected
+                    {% endif %}
+                >
+                    School
+                </option>
+
+                <option
+                    value="Forest"
+                    {% if form and form.setting == "Forest" %}
+                    selected
+                    {% endif %}
+                >
+                    Forest
+                </option>
+
+                <option
+                    value="Space"
+                    {% if form and form.setting == "Space" %}
+                    selected
+                    {% endif %}
+                >
+                    Space
+                </option>
+
+                <option
+                    value="City"
+                    {% if form and form.setting == "City" %}
+                    selected
+                    {% endif %}
+                >
+                    City
+                </option>
+
+            </select>
+
+        </div>
+
+
+        <!-- Tone -->
+
+        <div class="form-group">
+
+            <label for="tone">
+                Tone
+            </label>
+
+            <select
+                id="tone"
+                name="tone"
+                required
+            >
+
+                <option value="">
+                    Select a tone
+                </option>
+
+                <option
+                    value="Light-hearted"
+                    {% if form and form.tone == "Light-hearted" %}
+                    selected
+                    {% endif %}
+                >
+                    Light-hearted
+                </option>
+
+                <option
+                    value="Dramatic"
+                    {% if form and form.tone == "Dramatic" %}
+                    selected
+                    {% endif %}
+                >
+                    Dramatic
+                </option>
+
+                <option
+                    value="Poetic"
+                    {% if form and form.tone == "Poetic" %}
+                    selected
+                    {% endif %}
+                >
+                    Poetic
+                </option>
+
+                <option
+                    value="Funny"
+                    {% if form and form.tone == "Funny" %}
+                    selected
+                    {% endif %}
+                >
+                    Funny
+                </option>
+
+            </select>
+
+        </div>
+
+
+        <!-- Art Style -->
+
+        <div class="form-group">
+
+            <label for="art_style">
+                Art Style
+            </label>
+
+            <select
+                id="art_style"
+                name="art_style"
+                required
+            >
+
+                <option value="">
+                    Select an art style
+                </option>
+
+                <option
+                    value="Anime"
+                    {% if form and form.art_style == "Anime" %}
+                    selected
+                    {% endif %}
+                >
+                    Anime
+                </option>
+
+                <option
+                    value="Pixel Art"
+                    {% if form and form.art_style == "Pixel Art" %}
+                    selected
+                    {% endif %}
+                >
+                    Pixel Art
+                </option>
+
+                <option
+                    value="Comic Book"
+                    {% if form and form.art_style == "Comic Book" %}
+                    selected
+                    {% endif %}
+                >
+                    Comic Book
+                </option>
+
+                <option
+                    value="Realistic"
+                    {% if form and form.art_style == "Realistic" %}
+                    selected
+                    {% endif %}
+                >
+                    Realistic
+                </option>
+
+            </select>
+
+        </div>
+
+
+        <button
+            type="submit"
+            class="btn primary"
+        >
+            ✨ Generate Comic
+        </button>
+
+    </form>
+
+</section>
+
+
+<section class="info-grid">
+
+    <div class="info-card">
+
+        <h3>1. Story</h3>
+
+        <p>
+            Gemini creates a five-panel story outline
+            from your idea.
+        </p>
+
+    </div>
+
+
+    <div class="info-card">
+
+        <h3>2. Dialogue</h3>
+
+        <p>
+            AI expands the outline with narration,
+            captions and dialogue.
+        </p>
+
+    </div>
+
+
+    <div class="info-card">
+
+        <h3>3. Illustrations</h3>
+
+        <p>
+            AI generates an illustration for every
+            comic panel.
+        </p>
+
+    </div>
+
+
+    <div class="info-card">
+
+        <h3>4. PDF</h3>
+
+        <p>
+            Preview your comic and export it as a PDF.
+        </p>
+
+    </div>
+
+</section>
+
+{% endblock %}

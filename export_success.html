@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+
+
+{% block content %}
+
+<section class="success-card card">
+
+    <div class="success-icon">
+        ✓
+    </div>
+
+    <h1>
+        Export Complete!
+    </h1>
+
+    <p>
+        Your ComicCraft PDF has been created successfully.
+    </p>
+
+
+    {% if pdf_url %}
+
+    <a
+        href="{{ pdf_url }}"
+        class="btn primary"
+        target="_blank"
+    >
+        📄 Open PDF
+    </a>
+
+    {% endif %}
+
+
+    <a
+        href="/"
+        class="btn secondary"
+    >
+        ← Back to ComicCraft
+    </a>
+
+</section>
+
+{% endblock %}

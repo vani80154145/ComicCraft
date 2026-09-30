@@ -1,0 +1,221 @@
+{% extends "base.html" %}
+
+
+{% block content %}
+
+<section class="preview-header">
+
+    <div>
+
+        <p class="eyebrow">
+            YOUR COMIC
+        </p>
+
+        <h1>
+            Comic Preview
+        </h1>
+
+        <p class="muted">
+            Your five-panel comic has been generated.
+        </p>
+
+    </div>
+
+
+    <div class="preview-actions">
+
+        <a
+            href="{{ pdf_url }}"
+            class="btn primary"
+            target="_blank"
+        >
+            📄 Download PDF
+        </a>
+
+        <a
+            href="/"
+            class="btn secondary"
+        >
+            ← Create Another
+        </a>
+
+    </div>
+
+</section>
+
+
+{% if request_data %}
+
+<section class="summary card">
+
+    <h2>
+        Story Details
+    </h2>
+
+    <div class="details-grid">
+
+        <div>
+            <span class="detail-label">
+                Character
+            </span>
+
+            <strong>
+                {{ request_data.character_name }}
+            </strong>
+        </div>
+
+
+        <div>
+            <span class="detail-label">
+                Setting
+            </span>
+
+            <strong>
+                {{ request_data.setting }}
+            </strong>
+        </div>
+
+
+        <div>
+            <span class="detail-label">
+                Tone
+            </span>
+
+            <strong>
+                {{ request_data.tone }}
+            </strong>
+        </div>
+
+
+        <div>
+            <span class="detail-label">
+                Art Style
+            </span>
+
+            <strong>
+                {{ request_data.art_style }}
+            </strong>
+        </div>
+
+    </div>
+
+</section>
+
+{% endif %}
+
+
+<section class="comic-grid">
+
+    {% for panel in layout %}
+
+    <article class="comic-panel">
+
+        <div class="panel-number">
+
+            Panel {{ panel.panel_number }}
+
+        </div>
+
+
+        <h2>
+            {{ panel.title }}
+        </h2>
+
+
+        <div class="panel-image-wrapper">
+
+            <img
+                src="{{ panel.image_url }}"
+                alt="Comic panel {{ panel.panel_number }}"
+                class="panel-image"
+            >
+
+        </div>
+
+
+        <div class="panel-content">
+
+            <h3>
+                Scene
+            </h3>
+
+            <p>
+                {{ panel.scene_description }}
+            </p>
+
+
+            {% if panel.caption %}
+
+            <h3>
+                Caption
+            </h3>
+
+            <p>
+                {{ panel.caption }}
+            </p>
+
+            {% endif %}
+
+
+            {% if panel.narration %}
+
+            <h3>
+                Narration
+            </h3>
+
+            <p>
+                {{ panel.narration }}
+            </p>
+
+            {% endif %}
+
+
+            {% if panel.dialogue %}
+
+            <h3>
+                Dialogue
+            </h3>
+
+            <div class="dialogue">
+
+                💬 {{ panel.dialogue }}
+
+            </div>
+
+            {% endif %}
+
+
+            <details>
+
+                <summary>
+                    Image Prompt
+                </summary>
+
+                <p class="prompt-text">
+                    {{ panel.image_prompt }}
+                </p>
+
+            </details>
+
+        </div>
+
+    </article>
+
+    {% endfor %}
+
+</section>
+
+
+<section class="bottom-actions">
+
+    <a
+        href="{{ pdf_url }}"
+        class="btn primary"
+        target="_blank"
+    >
+        📄 Download Comic PDF
+    </a>
+
+</section>
+
+{% endblock %}
