@@ -1,0 +1,40 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Virtual environment
+venv/
+env/
+.venv/
+comiccraft-env/
+
+# Environment variables
+.env
+
+# IDE
+.vscode/
+.idea/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Generated images
+static/panels/*.png
+static/panels/*.jpg
+static/panels/*.jpeg
+static/panels/*.webp
+
+# Generated PDFs
+exports/*.pdf
+
+# Test/cache
+.pytest_cache/
+.coverage
+htmlcov/
+
+# Build files
+build/
+dist/
+*.egg-info/
